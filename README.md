@@ -1,7 +1,7 @@
 ## MERL
 [Zero-Shot ECG Classification with Multimodal Learning and Test-time Clinical Knowledge Enhancement](https://arxiv.org/abs/2403.06659), ICML 2024.
 
-![framework](docs/framework.jpg)
+![framework](docs/framework.png)
 
 ###  Installation
 To clone this repository:
