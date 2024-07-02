@@ -26,7 +26,8 @@ Datasets we used are as follows:
 After downloading datasets, please check the details of preprocessing in `finetune/readme.md`.
 
 ### Data Preprocessing
-We preprocessed these datasets and split the dataset into train/val/test set using the code in `finetune/preprocess.ipynb`.\
+We preprocessed pretraining datasets and split the dataset into train/val set using the code in `pretrain/preprocess.ipynb`.\
+We preprocessed downstream datasets and split the dataset into train/val/test set using the code in `finetune/preprocess.ipynb`.\
 We also provide the train/val/test split csv file in `finetune/data_split`
 
 ### Pre-training
@@ -39,17 +40,15 @@ bash MERL/pretrain/launch.sh
 
 Pre-trained models can be found [here](https://github.com/cheliu-computation/MERL)(Coming soon).
 
-### Finetune on downstream tasks
+### Downstream tasks
 We evlauate the performance of MERL on three scenarios: zero-shot classification, linear probing, and domain transferring.
 
 #### zero-shot classification
 We evaluate linear classification performance of our model using this command:
 ```
-cd MERL/zeroshot/sub_script
-bash run_all_transfer.sh
+cd MERL/zeroshot
+bash zeroshot.sh
 ```
-We can use `--dataset` to set specific dataset for finetuning. Here, 3 datsets are available: chexpert, rsna and covidx.
-We can use `--data_pct` to set the fraction of training data for finetuning.
 
 #### linear probing
 We provide bash script for evaluating linear probing performance of MERL:
@@ -57,28 +56,18 @@ We provide bash script for evaluating linear probing performance of MERL:
 cd MERL/finetune/sub_script
 bash run_all_linear.sh
 ```
+You can use `--dataset` to set specific dataset for finetuning. Here, 3 datsets are available: chexpert, rsna and covidx.
+You can use `--ratio` to set the fraction of training data for finetuning.
 
 #### domain transferring
-We evaluate semantic segmentation performance of our model using this command:
-```
-cd MERL/transfer/sub_script
-bash run_all_transfer.sh
-```
-
-### TODO List
-- [ ] Upload Pre-train code.
-- [ ] Upload zeroshot code.
-- [ ] Upload linear probing code.
-- [ ] Upload domain transferring code.
-- [ ] Upload Pre-trained Model.
+For domain trasnfering scenario, you do not reimplement any new experiments. You can only compute the metric across the overlapped categories.
 
 ### Reference
 If you found our work useful in your research, please consider citing our works(s) at:
 ```bash
-@article{liu2024zero,
+@inproceedings{liuzero,
   title={Zero-Shot ECG Classification with Multimodal Learning and Test-time Clinical Knowledge Enhancement},
   author={Liu, Che and Wan, Zhongwei and Ouyang, Cheng and Shah, Anand and Bai, Wenjia and Arcucci, Rossella},
-  journal={arXiv preprint arXiv:2403.06659},
-  year={2024}
+  booktitle={Forty-first International Conference on Machine Learning}
 }
 ```

@@ -1,0 +1,66 @@
+network:
+  ecg_model: resnet18
+  ### this part does not control builder/trainer
+  text_model: ncbi/MedCPT-Query-Encoder
+  free_layers: 9 # set 12 to freeze all layer in bert
+  feature_dim: 768
+
+  projection_head:
+    mlp_hidden_size: 256
+    projection_size: 256
+  ###
+
+dataset:
+  dataset_name: 'mimic'
+  data_path: '/scratch_hive/cl522/ecg-text/mimic_npy_new/' # add your image file path here
+
+# params for trainer
+trainer:
+  batch_size: 1024
+  val_batch_size: 512
+  checkpoint_interval: 1
+  max_epochs: 100
+  num_workers: 8
+
+optimizer:
+  params:
+    lr: 1.0e-3
+    weight_decay: 1.0e-8
+
+# params for zeroshot eval
+zeroshot:
+  prompt_type: 'CKEPE'
+  prompt_dict: '/scratch_hive/home/cl522/github_repo/repo_backup/MERL/zeroshot/CKEPE_prompt.json'
+  batch_size: 256
+  num_workers: 8
+  meta_data_path: '/scratch_hive/cl522/ecg-text/downstream'
+  meta_split_path: '/scratch_hive/home/cl522/github_repo/repo_backup/MERL/finetune/data_split'
+  
+  test_sets:
+  ###
+    ptbxl_super_class:
+      data_path: 'ptbxl'
+      split_path: 'ptbxl/super_class/ptbxl_super_class_test.csv'
+  ###
+    ptbxl_sub_class:
+      data_path: 'ptbxl'
+      split_path: 'ptbxl/sub_class/ptbxl_sub_class_test.csv'
+  ###
+    ptbxl_form:
+      data_path: 'ptbxl'
+      split_path: 'ptbxl/form/ptbxl_form_test.csv'
+  ###
+    ptbxl_rhythm:
+      data_path: 'ptbxl'
+      split_path: 'ptbxl/rhythm/ptbxl_rhythm_test.csv'
+  ###
+    icbeb:
+      data_path: 'icbeb2018/records500'
+      split_path: 'icbeb/icbeb_test.csv'
+  ###
+    chapman:
+      data_path: ''
+      split_path: 'chapman/chapman_test.csv'
+
+# your model name
+wandb_name: 'None'
