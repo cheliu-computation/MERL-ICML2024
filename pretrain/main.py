@@ -37,7 +37,7 @@ def ddp_main():
         wandb.login(key='42e5b13bf6e37f40f855df92e2e2678af2579df3')
         run = wandb.init(
             # Set the project where this run will be logged
-            project="MERL",
+            project="MERL_ICML",
             name = config['wandb_name'],
             # Track hyperparameters and run metadata
             config={

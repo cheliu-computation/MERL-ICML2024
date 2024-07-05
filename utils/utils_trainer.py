@@ -51,14 +51,15 @@ class trainer_wBert:
                                 
         
         model_checkpoints_folder = os.path.join('../checkpoints/')
-        if not os.path.exists(model_checkpoints_folder):
-            print('create directory "{}" for save checkpoint!'.format(
-                model_checkpoints_folder))
-            print('---------------------------')
-            os.makedirs(model_checkpoints_folder)
-        else:
-            print('directory "{}" existing for save checkpoint!'.format(
-                model_checkpoints_folder))
+        if self.device == 0:
+            if not os.path.exists(model_checkpoints_folder):
+                print('create directory "{}" for save checkpoint!'.format(
+                    model_checkpoints_folder))
+                print('---------------------------')
+                os.makedirs(model_checkpoints_folder)
+            else:
+                print('directory "{}" existing for save checkpoint!'.format(
+                    model_checkpoints_folder))
 
         # automatically resume from checkpoint if it exists
         print('#########################################')

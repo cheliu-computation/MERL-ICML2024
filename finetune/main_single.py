@@ -18,7 +18,7 @@ from torch import nn, optim
 import torch
 import torch.nn.functional as F
 from matplotlib import pyplot as plt
-from dataset import getdataset
+from finetune_dataset import getdataset
 from models.resnet1d import ResNet18, ResNet34, ResNet50, ResNet101
 from models.vit1d import vit_base, vit_small, vit_tiny, vit_middle
 

@@ -73,7 +73,10 @@ class ECGCLIP(torch.nn.Module):
                                                     embed_dim=self.proj_out, 
                                                     num_heads=4, 
                                                     output_dim=self.proj_out)
-        
+
+            self.linear1 = nn.Linear(self.proj_out, self.proj_out, bias=False)
+            self.linear2 = nn.Linear(self.proj_out, self.proj_out, bias=False)
+
         if 'vit' in self.ecg_model:
             if self.ecg_model == 'vit_tiny':
                 model = vit_tiny(num_leads=self.num_leads)
@@ -91,13 +94,13 @@ class ECGCLIP(torch.nn.Module):
                 nn.Linear(self.proj_hidden, self.proj_out),
                 nn.BatchNorm1d(self.proj_out),
             )
+            self.linear1 = nn.Linear(self.proj_e_input, self.proj_out, bias=False)
+            self.linear2 = nn.Linear(self.proj_e_input, self.proj_out, bias=False)
 
 
         self.ecg_encoder = model
         self.avgpool = nn.AdaptiveAvgPool1d(1)
         
-        self.linear1 = nn.Linear(self.proj_out, self.proj_out, bias=False)
-        self.linear2 = nn.Linear(self.proj_out, self.proj_out, bias=False)
 
         self.dropout1 = nn.Dropout(p=0.1)
         self.dropout2 = nn.Dropout(p=0.1)
