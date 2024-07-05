@@ -38,7 +38,10 @@ We pre-trained MERL on MIMIC-IV-ECG using this command:
 bash MERL/pretrain/launch.sh
 ```
 
-Pre-trained models can be found [here](https://drive.google.com/drive/folders/13wb4DppUciMn-Y_qC2JRWTbZdz3xX0w2?usp=drive_link).
+Pre-trained models can be found [here](https://drive.google.com/drive/folders/13wb4DppUciMn-Y_qC2JRWTbZdz3xX0w2?usp=drive_link).\
+We uploaded the pretrained models with resenet and vit.\
+xxx_ckpt.pth is the whole pretrained model for zeroshot classification.\
+xxx_encoder.pth is the ecg encoder only for linear probing.
 
 ### Downstream tasks
 We evlauate the performance of MERL on three scenarios: zero-shot classification, linear probing, and domain transferring.
