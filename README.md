@@ -38,7 +38,7 @@ We pre-trained MERL on MIMIC-IV-ECG using this command:
 bash MERL/pretrain/launch.sh
 ```
 
-Pre-trained models can be found [here](https://github.com/cheliu-computation/MERL)(Coming soon).
+Pre-trained models can be found [here](https://drive.google.com/drive/folders/13wb4DppUciMn-Y_qC2JRWTbZdz3xX0w2?usp=drive_link).
 
 ### Downstream tasks
 We evlauate the performance of MERL on three scenarios: zero-shot classification, linear probing, and domain transferring.
