@@ -1,8 +1,10 @@
 network:
-  ecg_model: resnet18
+  # ecg_model: resnet18
+  ecg_model: vit_tiny
+  num_leads: 12
   ### this part does not control builder/trainer
   text_model: ncbi/MedCPT-Query-Encoder
-  free_layers: 9 # set 12 to freeze all layer in bert
+  free_layers: 6 # set 12 to freeze all layer in bert
   feature_dim: 768
 
   projection_head:
@@ -12,7 +14,7 @@ network:
 
 dataset:
   dataset_name: 'mimic'
-  data_path: '/scratch_hive/cl522/ecg-text/mimic_npy_new/' # add your image file path here
+  data_path: 'your_path/' # add your image file path here
 
 # params for trainer
 trainer:
@@ -30,11 +32,11 @@ optimizer:
 # params for zeroshot eval
 zeroshot:
   prompt_type: 'CKEPE'
-  prompt_dict: '/scratch_hive/home/cl522/github_repo/repo_backup/MERL/zeroshot/CKEPE_prompt.json'
+  prompt_dict: 'your_path/MERL/zeroshot/CKEPE_prompt.json'
   batch_size: 256
   num_workers: 8
-  meta_data_path: '/scratch_hive/cl522/ecg-text/downstream'
-  meta_split_path: '/scratch_hive/home/cl522/github_repo/repo_backup/MERL/finetune/data_split'
+  meta_data_path: 'your_path/downstream'
+  meta_split_path: 'your_path/MERL/finetune/data_split'
   
   test_sets:
   ###
