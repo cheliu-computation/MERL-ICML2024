@@ -182,6 +182,7 @@ class MIMIC_E_T_Dataset(Dataset):
 
         # we have to divide 1000 to get the real value
         ecg = self.ecg_data[idx]/1000
+        s
         # ecg = (ecg - np.min(ecg))/(np.max(ecg) - np.min(ecg) + 1e-8)
         
 
