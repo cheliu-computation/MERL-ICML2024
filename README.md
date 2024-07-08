@@ -52,6 +52,8 @@ We evaluate linear classification performance of our model using this command:
 cd MERL/zeroshot
 bash zeroshot.sh
 ```
+We also release the CKEPE prompt in `zeroshot/CKEPE_prompt.json`.\
+Due to the copyright, we are unable to release the original SCP-code database, but you can find all information in: [https://www.iso.org/standard/84664.html](https://www.iso.org/standard/84664.html).
 
 #### linear probing
 We provide bash script for evaluating linear probing performance of MERL:
