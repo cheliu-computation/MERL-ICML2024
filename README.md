@@ -8,10 +8,6 @@ To clone this repository:
 ```
 git clone https://github.com/cheliu-computation/MERL.git
 ```
-To install Python dependencies:
-```
-pip install -r requirements.txt
-```
 
 ### Dataset downloading
 Datasets we used are as follows:
@@ -23,7 +19,6 @@ Datasets we used are as follows:
 
 - **CSN(Chapman-Shaoxing-Ningbo)**: We downloaded the [CSN](https://physionet.org/content/ecg-arrhythmia/1.0.0/) dataset.
 
-After downloading datasets, please check the details of preprocessing in `finetune/readme.md`.
 
 ### Data Preprocessing
 We preprocessed pretraining datasets and split the dataset into train/val set using the code in `pretrain/preprocess.ipynb`.\
