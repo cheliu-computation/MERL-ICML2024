@@ -164,19 +164,6 @@ class ViT(nn.Module):
         # conv patch start
         self.to_patch_embedding = nn.Conv1d(num_leads, width, kernel_size=patch_size, stride=patch_size, bias=False)
         self.pos_embedding = nn.Parameter(torch.randn(1, num_patches, width))
-        # conv patch end
-
-        # original patch start
-        # self.to_patch_embedding = nn.Sequential(Rearrange('b c (n p) -> b n (p c)', p=patch_size),
-        #                                         nn.LayerNorm(patch_size),
-        #                                         nn.Linear(patch_size, width),
-        #                                         nn.LayerNorm(width))
-
-        # self.pos_embedding = nn.Parameter(torch.randn(1, num_patches + 2, width))
-        # self.sep_embedding = nn.Parameter(torch.randn(width))
-        # self.lead_embeddings = nn.ParameterList(nn.Parameter(torch.randn(width))
-                                                # for _ in range(num_leads))
-        # original patch end
 
         self.dropout = nn.Dropout(drop_out_rate)
 
@@ -206,50 +193,10 @@ class ViT(nn.Module):
         x = rearrange(x, 'b c n -> b n c')
         x = x + self.pos_embedding
 
-        # for original patch start
-        # L = series.shape[1]
-        # if L > len(self.lead_embeddings):
-        #     raise ValueError(f'Number of leads must be less than or equal to {self.num_leads}')
-
-        # all_leads = []
-        # for i in range(L):
-        #     x_lead = self.to_patch_embedding(series[:, i:i + 1, :])
-
-        #     n = x_lead.shape[1]
-
-        #     # add positional embeddings
-        #     x_lead = x_lead + self.pos_embedding[:, 1:n + 1, :]
-
-        #     # lead indicating modules
-        #     sep_embedding = self.sep_embedding.unsqueeze(0)
-        #     left_sep = sep_embedding.expand(x_lead.shape[0], -1, -1) + self.pos_embedding[:, :1, :]
-        #     right_sep = sep_embedding.expand(x_lead.shape[0], -1, -1) + self.pos_embedding[:, -1:, :]
-        #     x_lead = torch.cat((left_sep, x_lead, right_sep), dim=1)
-        #     lead_embedding = self.lead_embeddings[i].unsqueeze(0)
-        #     lead_embedding = lead_embedding.expand(x_lead.shape[0], x_lead.shape[1], -1)
-        #     x_lead += lead_embedding
-
-        #     all_leads.append(x_lead)
-
-        # x = torch.cat(all_leads, dim=1)
-        # for original patch end
-
         # transformer blocks
         x = self.dropout(x)
         for i in range(self.depth):
             x = getattr(self, f'block{i}')(x)
-
-        # for original patch start
-        # each_lead_patch_len = x.shape[1] // L
-        # x_ = []
-        # for i in range(L):
-        #     from_ = i * each_lead_patch_len
-        #     end_ = from_ + each_lead_patch_len
-        #     x_.append(x[:, from_ + 1:end_ - 1, :])  # remove sep embeddings
-        
-        # x_ = torch.cat(x_, dim=1)
-        # x = x_
-        # for original patch end
 
         x = torch.mean(x, dim=1)  # global average pooling
 
