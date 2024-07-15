@@ -64,8 +64,8 @@ def main():
     torch.backends.cudnn.benchmark = True
     print(f'this task use {args.dataset} dataset')
 
-    data_split_path = '/scratch_hive/home/cl522/github_repo/repo_backup/MERL_my/finetune/data_split'
-    data_meta_path = '/scratch_hive/cl522/ecg-text/downstream'
+    data_split_path = 'your_path/MERL/finetune/data_split'
+    data_meta_path = 'your_path/downstream'
     
     if 'ptbxl' in args.dataset:
         # set the path where you store the ptbxl dataset
